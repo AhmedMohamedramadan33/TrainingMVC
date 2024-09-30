@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Training.Models.ViewModel.GetProducts>
+@using Microsoft.Extensions.Localization;
+@using Training.Resources;
+@inject IStringLocalizer<SharedResources> _SharedResource
+@{
+    ViewData["Title"] = "Index";
+}
+<partial name="_ToastrpartialView">
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                    @_SharedResource[SharedResourcesKey.Id]
+                </th>
+            <th>
+                    @_SharedResource[SharedResourcesKey.Name]
+                </th>
+            <th>
+               @* @Html.DisplayNameFor(model => model.Price)*@
+               @_SharedResource[SharedResourcesKey.Price]
+            </th>
+@*            <th>@Html.DisplayNameFor(Model=>Model.formFile)</th>
+                *@
+                <th>
+                    @_SharedResource[SharedResourcesKey.Actions]
+                </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+@*            <td><img src="@item.PathFile" alt="No File" width="100" height="100" class="img-thumbnail" /></td>
+*@            <td>
+                        @Html.ActionLink( @_SharedResource[SharedResourcesKey.Edit], "Update", new {  id=item.Id  }) |
+                        @Html.ActionLink( @_SharedResource[SharedResourcesKey.Details], "Details", new { id=item.Id }) |
+                        @Html.ActionLink( @_SharedResource[SharedResourcesKey.Delete], "Delete", new {id=item.Id  })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Training.Models.Category>
+
+
+
+<h2 class="mb-5">Product List</h2>
+
+@foreach(var i in Model)
+{
+    <h3  >@i.NameEn</h3>
+    <div class="row">
+    @if(i.Products.Count()==0)
+        {
+            <h6>No Product In This Category</h6>
+        }
+        else
+        {
+             @foreach(var t in i.Products)
+        {          
+           <div class="card  col-lg-4 col-md-6 col-sm-12">
+               <div class="card-header">
+               @t.NameEn
+               </div>
+                  <div class="card-body">
+                     @t.Price
+                  </div>
+                  <div class="card-footer">
+                    <a asp-action="Details" asp-controller="Product" asp-route-id="@t.Id" class="btn btn-info">Details</a>
+                  </div>
+            </div>
+                    
+        }
+        }
+
+       
+    </div>
+    <hr />
+}
